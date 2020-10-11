@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "687293749170",
+    "firebase_url": "https://ebooks-1c31d.firebaseio.com",
+    "project_id": "ebooks-1c31d",
+    "storage_bucket": "ebooks-1c31d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:687293749170:android:a6b39bab622dd1269bb6ab",
+        "android_client_info": {
+          "package_name": "com.sejjoh.ebooks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "687293749170-0t28nnfsr4l4k2cd8b1ooarusp9a0g3b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIad5G7ldTOF3ftaAqgP_VBm0wZScmfDs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "687293749170-0t28nnfsr4l4k2cd8b1ooarusp9a0g3b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

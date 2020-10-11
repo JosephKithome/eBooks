@@ -4,4 +4,5 @@
     <color name="primaryLightColor">#5a5b67</color>
     <color name="primaryDarkColor">#090a17</color>
     <color name="primaryTextColor">#ffffff</color>
+    <color name="error_color">#fff00000</color>
 </resources>

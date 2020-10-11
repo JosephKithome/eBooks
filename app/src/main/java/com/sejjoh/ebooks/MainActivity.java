@@ -1,14 +1,18 @@
 package com.sejjoh.ebooks;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,12 +23,14 @@ import android.widget.TextView;
 
 import com.sejjoh.ebooks.Adapters.BooksAdapter;
 import com.sejjoh.ebooks.Api.ApiUtils;
+import com.sejjoh.ebooks.Api.PreferenceKeys;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
+    private static final String TAG ="MainActivity" ;
     private ProgressBar mLoadingProgress;
     private RecyclerView rvBooks;
 
@@ -34,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         setContentView(R.layout.activity_main);
         rvBooks = (RecyclerView) findViewById(R.id.recycler);
         mLoadingProgress = (ProgressBar) findViewById(R.id.pb_loading);
+        isFirstLogin();
         Intent intent = getIntent();
         String query = intent.getStringExtra("query");
 
@@ -58,6 +65,32 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         rvBooks.setLayoutManager(booksLayoutManager);
 
 
+    }
+    private  void  isFirstLogin(){
+        Log.d(TAG, "isFirstLogin: checking if this is the first Login ");
+        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean isFirstLogin =preferences.getBoolean(PreferenceKeys.FIRST_TIME_LOGIN, true);
+        if (isFirstLogin){
+            Log.d(TAG, "isFirstLogin: Launching alert dialog.");
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("welcome and start accessing books from the amazing google books Api.We are digitizing every book " +
+                    "content around the world");
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Log.d(TAG, "onClick: Closing dialog.");
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putBoolean(PreferenceKeys.FIRST_TIME_LOGIN, false);
+                    editor.commit();
+                    dialogInterface.dismiss();
+
+                }
+            });
+            builder.setIcon(R.drawable.ic_baseline_menu_book_24);
+            builder.setTitle("");
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        }
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

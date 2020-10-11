@@ -12,5 +12,6 @@ protected void onCreate(Bundle savedInstanceState) {
     ActivityBookDetailBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_book_detail);
     Books book= getIntent().getParcelableExtra("Book");
     binding.setBooks(book);
+    overridePendingTransition(R.anim.slide_in,R.anim.slide_in);
 }
 }
